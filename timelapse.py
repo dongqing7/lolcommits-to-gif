@@ -51,10 +51,10 @@ if __name__ == '__main__':
     jpg_files.sort(cmp=by_date)
 
     # copy to tmp directory with sorted names:
-    shutil.rmtree('tmp')
+    if os.path.exists(tmp_directory):
+        shutil.rmtree(tmp_directory)
 
-    if not os.path.exists(tmp_directory):
-        os.makedirs(tmp_directory)
+    os.makedirs(tmp_directory)
 
     for i, (root, f) in enumerate(jpg_files):
         print f, last_modified(os.path.join(root, f))
@@ -69,4 +69,4 @@ if __name__ == '__main__':
     retval = p.wait()
 
     # remove tmp directory
-    shutil.rmtree('tmp')
+    shutil.rmtree(tmp_directory)
